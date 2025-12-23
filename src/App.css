@@ -11,11 +11,22 @@ background-color: azure;
 
 .read-the-docs{
   color: blue;
-  animation: blink .1s infinite; 
-  animation: blink 60s infinite, pulse 1s infinite, shake 0.4s infinite alternate;
+  animation: blink .9s infinite; 
+ /* animation: blink .1s infinite,shake 0.4s infinite alternate, pulse 1s infinite;*/
 }
   
+h2{
+   color: red;
+  animation: blink .1s infinite; 
+  animation: shake 0.4s infinite alternate;
+  background-color:antiquewhite;
+}
+button{
+  color: red;
+  animation: blink .1s infinite; 
+  animation: pulse 1s infinite;
 
+}
 
 @keyframes blink {
   0% {
