@@ -1,0 +1,105 @@
+/* Add to LudoGame.css file */
+
+.token {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 30px; /* Adjust size to fit in 40px cells */
+    height: 30px;
+    cursor: pointer;
+    z-index: 10; /* Ensure tokens appear above the board squares */
+    background-color: white; /* Placeholder color */
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Add colors for players (pIdx 0-3 maps to 1-4 here) */
+.player-1 { background-color: red; }
+.player-2 { background-color: green; }
+.player-3 { background-color: yellow; }
+.player-4 { background-color: blue; }
+
+/* Ensure the ludo-container class is defined as a grid in your CSS */
+
+.ludo-container {
+  display: grid;
+  grid-template-columns: repeat(15, 30px); /* 15 columns, 40px wide each */
+  grid-template-rows: repeat(15, 30px);    /* 15 rows, 40px high each */
+  gap: .5px;
+  width: 100%;
+  margin: 5px; /* Center the board */
+  margin-bottom: 30px;
+}
+
+/* Base areas span 6x6 cells */
+.base {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}
+
+/* Specific colors and positioning for each base */
+.red-base { 
+  background-color: #ff4d4d; 
+  grid-area: 1 / 1 / span 6 / span 6; /* Top-Left */
+}
+.green-base { 
+  background-color: #2ecc71; 
+  grid-area: 1 / 10 / span 6 / span 6; /* Top-Right (starts at column 10) */
+}
+.yellow-base { 
+  background-color: #f1c40f; 
+  grid-area: 10 / 10 / span 6 / span 6; /* Bottom-Right (starts at row 10, col 10) */
+}
+.blue-base { 
+  background-color: #3498db; 
+  grid-area: 10 / 1 / span 6 / span 6; /* Bottom-Left (starts at row 10) */
+}
+
+/* Style for individual tokens/buttons */
+button {
+    padding: 5px 30px;
+    margin: 5px;
+    cursor: pointer;
+    color:red;
+    background-color: #d5f1e0;
+}
+.board-square {
+  background-color: white; /* The color of the path squares */
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Optional: Add specific colors to key starting squares if desired */
+.board-square.red-start { background-color: red; }
+.board-square.yellow-start { background-color: rgb(205, 240, 6); }
+.board-square.blue-start { background-color: rgb(36, 12, 252); }
+.board-square.green-start { background-color: rgb(33, 87, 44); }
+/* ... and so on for other colors */
+.board-square {
+  background-color: white; /* The default color of the path squares */
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Specific start zone colors (lighter shade works well here) */
+.red-start-zone {
+    background-color: #ffcccc; /* Lighter red */
+    border-color: red;
+}
+
+.green-start-zone {
+    background-color: #d5f1e0; /* Lighter green */
+    border-color: green;
+}
+
+.yellow-start-zone {
+    background-color: #fef0b3; /* Lighter yellow */
+    border-color: #f1c40f;
+}
+
+.blue-start-zone {
+    background-color: #cce0f1; /* Lighter blue */
+    border-color: blue;
+}
