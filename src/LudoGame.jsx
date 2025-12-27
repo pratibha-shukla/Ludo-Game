@@ -18,22 +18,34 @@ const LudoGame = () => {
     setDiceRoll(roll);
     if (roll !== 6) setCurrentPlayer((prev) => (prev + 1) % 4);
   };
-
+  
   const moveToken = (playerIndex, tokenIndex) => {
     if (playerIndex !== currentPlayer) return;
+
+      const startIndices = [0, 12, 25, 38]; 
 
     let newPositions = [...positions];
     let currentPos = newPositions[playerIndex][tokenIndex];
       let moved = false; // Track if a move actually happened
 
     if (currentPos === -1 && diceRoll === 6) {
-      newPositions[playerIndex][tokenIndex] = 0; // Needs player start logic
+       //newPositions[playerIndex][tokenIndex] = 0;
+      newPositions[playerIndex][tokenIndex] = startIndices[playerIndex]; // Needs player start logic
         moved = true;
+     
 
     } else if (currentPos >= 0) {
-      newPositions[playerIndex][tokenIndex] += diceRoll;
-        moved = true;
+        const nextPos = currentPos + diceRoll;
+      // newPositions[playerIndex][tokenIndex] += diceRoll;
+      //   moved = true;
+    
+      // Ensure the token stays within the path bounds
+    if (nextPos < boardPathMap.length) {
+      newPositions[playerIndex][tokenIndex] = nextPos;
+      moved = true;
     }
+  }
+
     if (moved) {
     setPositions(newPositions);
     
@@ -41,6 +53,7 @@ const LudoGame = () => {
     if (diceRoll !== 6) {
       setCurrentPlayer((prev) => (prev + 1) % 4);
     }
+     setDiceRoll(0);
     // If it was a 6, the currentPlayer state remains the same,
     // and they get to roll/move again.
   }
@@ -63,6 +76,7 @@ const LudoGame = () => {
     <div style={{ textAlign: 'center'}}>
       <h2>Player {currentPlayer + 1}'s Turn</h2>
       <button onClick={rollDice}>Roll Dice: {diceRoll}</button>
+   
       
       {/* Main Board Container (only one instance) */}
       <div className="ludo-container">
@@ -80,6 +94,7 @@ const LudoGame = () => {
          <div className="base green-base"></div>
          <div className="base blue-base"></div>
          <div className="base yellow-base"></div>
+    
 
         {/* Render the dynamic tokens */}
         {positions.map((playerTokens, pIdx) => (
@@ -97,6 +112,6 @@ const LudoGame = () => {
       </div>
     </div>
   );
-};
+}
 
 export default LudoGame;

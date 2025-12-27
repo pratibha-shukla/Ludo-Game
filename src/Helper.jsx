@@ -45,7 +45,7 @@ export const getSquareColorClass = (row, col) => {
         if (row === 13 && col === 8) return 'blue-start-zone';
          if (row === 14 && col === 8) return 'blue-start-zone';
 
-       
+
       
 
 
@@ -60,31 +60,61 @@ export const getSquareColorClass = (row, col) => {
 export const boardPathMap = [
     // Red Path (starts at 0)
     { row: 7, col: 2 }, { row: 7, col: 3 }, { row: 7, col: 4 }, { row: 7, col: 5 }, { row: 7, col: 6 },
-    { row: 6, col: 6 }, { row: 5, col: 6 }, { row: 4, col: 6 }, { row: 3, col: 6 }, { row: 2, col: 6 },
-    { row: 1, col: 6 }, { row: 1, col: 7 }, { row: 1, col: 8 },
+    { row: 5, col: 7 }, { row: 4, col: 7 }, { row: 3, col: 7 }, { row: 2, col: 7 }, { row: 1, col: 7 },
+    { row: 1, col: 8 },{ row: 1, col: 9 }, { row: 2, col: 9 },
+     { row: 3, col: 9 }, { row: 4, col: 9 }, { row: 5, col: 9 }, { row: 6, col: 9 }, { row: 7, col: 10 },
+      { row: 7, col: 11 },{ row: 7, col: 12 }, { row: 7, col: 13 }, { row: 7, col: 14 }, { row: 7, col: 15 }, 
+      { row: 8, col: 15 }, { row: 9, col: 15},{ row: 9, col: 14 }, { row: 9, col: 13},{ row: 9, col: 12 },
+       { row: 9, col: 11},{ row: 9, col: 10}, { row: 10, col: 9},{ row: 11, col: 9},{ row: 12, col: 9}, 
+       { row: 13, col: 9},{ row: 14, col: 9},{ row: 15, col: 9}, { row: 15, col: 8},{ row: 15, col: 7},
+       { row: 14, col: 7}, { row: 13, col: 7},{ row: 12, col: 7},{ row: 11, col: 7}, { row: 10, col: 7},
+       { row: 9, col: 6},{ row: 9, col: 5}, { row: 9, col: 4},{ row: 9, col: 3},{ row: 9, col: 2}, 
+       { row: 9, col: 1},{ row: 8, col: 1},{ row: 8, col: 2}, { row: 8, col: 3},{ row: 8, col: 4},
+       { row: 8, col: 5}, { row: 8, col: 6},{ row: 8, col: 7},
     // Green Path (continues at 13)
-    { row: 2, col: 8 }, { row: 3, col: 8 }, { row: 4, col: 8 }, { row: 5, col: 8 }, { row: 6, col: 8 },
-    { row: 6, col: 9 }, { row: 6, col: 10 }, { row: 6, col: 11 }, { row: 6, col: 12 }, { row: 6, col: 13 },
-    { row: 6, col: 14 }, { row: 7, col: 15 }, { row: 8, col: 15 },
+   { row: 2, col: 9 },
+     { row: 3, col: 9 }, { row: 4, col: 9 }, { row: 5, col: 9 }, { row: 6, col: 9 }, { row: 7, col: 10 },
+      { row: 7, col: 11 },{ row: 7, col: 12 }, { row: 7, col: 13 }, { row: 7, col: 14 }, { row: 7, col: 15 }, 
+      { row: 8, col: 15 }, { row: 9, col: 15},{ row: 9, col: 14 }, { row: 9, col: 13},{ row: 9, col: 12 },
+       { row: 9, col: 11},{ row: 9, col: 10}, { row: 10, col: 9},{ row: 11, col: 9},{ row: 12, col: 9}, 
+       { row: 13, col: 9},{ row: 14, col: 9},{ row: 15, col: 9}, { row: 15, col: 8},{ row: 15, col: 7},
+       { row: 14, col: 7}, { row: 13, col: 7},{ row: 12, col: 7},{ row: 11, col: 7}, { row: 10, col: 7},
+       { row: 9, col: 6},{ row: 9, col: 5}, { row: 9, col: 4},{ row: 9, col: 3},{ row: 9, col: 2}, 
+       { row: 9, col: 1},{ row: 8, col: 1},{ row: 8, col: 2}, { row: 8, col: 3},{ row: 8, col: 4},
+       { row: 9, col: 1},{ row: 8, col: 1},{ row: 7, col: 1}, { row: 7, col: 2 }, { row: 7, col: 3 }, 
+       { row: 7, col: 4 }, { row: 7, col: 5 }, { row: 7, col: 6 },{ row: 5, col: 7 }, { row: 4, col: 7 }, 
+       { row: 3, col: 7}, { row: 2, col: 7 }, { row: 1, col: 7 }, { row: 1, col: 8 }, { row: 2, col: 8 }, 
+       { row: 3, col: 8}, { row: 4, col: 8 },{ row: 5, col: 8}, { row: 6, col: 8 },{ row: 7, col: 8}, 
     // Yellow Path (continues at 26)
-    { row: 8, col: 14 }, { row: 8, col: 13 }, { row: 8, col: 12 }, { row: 8, col: 11 }, { row: 8, col: 10 },
+    { row: 9, col: 14 }, { row: 8, col: 13 }, { row: 8, col: 12 }, { row: 8, col: 11 }, { row: 8, col: 10 },
     { row: 9, col: 10 }, { row: 10, col: 10 }, { row: 11, col: 10 }, { row: 12, col: 10 }, { row: 13, col: 10 },
     { row: 14, col: 10 }, { row: 15, col: 9 }, { row: 15, col: 8 },
     // Blue Path (continues at 39)
-    { row: 14, col: 8 }, { row: 13, col: 8 }, { row: 12, col: 8 }, { row: 11, col: 8 }, { row: 10, col: 8 },
+    { row: 14, col: 7 }, { row: 13, col: 8 }, { row: 12, col: 8 }, { row: 11, col: 8 }, { row: 10, col: 8 },
     { row: 9, col: 8 }, { row: 9, col: 7 }, { row: 9, col: 6 }, { row: 9, col: 5 }, { row: 9, col: 4 },
     { row: 9, col: 3 }, { row: 9, col: 2 }, { row: 8, col: 1 },
 ];
 
 export const basePositions = [
-    // Red Base
+    // Red Base 
     [{ row: 3, col: 3 }, { row: 3, col: 4 }, { row: 4, col: 3 }, { row: 4, col: 4 }],
-    // Green Base
+    // Green Base p2
     [{ row: 3, col: 12 }, { row: 3, col: 13 }, { row: 4, col: 12 }, { row: 4, col: 13 }],
-    // Yellow Base
+    // Yellow Base p3
     [{ row: 12, col: 12 }, { row: 12, col: 13 }, { row: 13, col: 12 }, { row: 13, col: 13 }],
-    // Blue Base
+    // Blue Base p4
     [{ row: 12, col: 3 }, { row: 12, col: 4 }, { row: 13, col: 3 }, { row: 13, col: 4 }],
+];
+
+export const startPositions = [
+    // Red Base P1
+    [{ row: 7, col: 2 }],
+    // Green Base P2
+    [{ row: 2, col: 9 }],
+    // Yellow Base P3
+    [{ row: 9, col: 14 }],
+    // Blue Base P4
+    [{ row: 14, col: 7 }],
 ];
 
 // Generate all individual board squares for rendering the path
