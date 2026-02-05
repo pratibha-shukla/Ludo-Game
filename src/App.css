@@ -28,7 +28,7 @@ button{
 
 }
 
-@keyframes blink {
+/* @keyframes blink {
   0% {
     opacity: 1;
   }
@@ -40,8 +40,8 @@ button{
   100% {
     opacity: 1;
   }
-}
-
+} */
+/* 
 @keyframes pulse {
   0%,
   100% {
@@ -53,11 +53,11 @@ button{
     transform: scale(1.1);
     background: orange;
   }
-}
+} */
 
 
 
-@keyframes shake {
+/* @keyframes shake {
   0% {
     transform: translateX(0);
   }
@@ -77,4 +77,4 @@ button{
   100% {
     transform: translateX(0);
   }
-}
+} */
