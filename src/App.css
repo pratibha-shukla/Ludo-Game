@@ -1,80 +1,20 @@
-body{
- 
-background-color: aquamarine;
+.app-shell {
+  width: min(1360px, calc(100vw - 32px));
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 10px 0 14px;
+  display: grid;
+  align-items: start;
 }
-#root {
-margin: 0 auto;
-text-align: center;
-background-color: azure;
-}
-
-
-.read-the-docs{
-  color: blue;
-  animation: blink .9s infinite; 
- /* animation: blink .1s infinite,shake 0.4s infinite alternate, pulse 1s infinite;*/
-}
-  
 h2{
-   color: red;
-  animation: blink .1s infinite; 
-  animation: shake 0.4s infinite alternate;
-  background-color:antiquewhite;
-}
-button{
-  color: red;
-  animation: blink .1s infinite; 
-  animation: pulse 1s infinite;
-
+  text-align: center;
+  color: #142235;
+  padding: 0.4px;
 }
 
-/* @keyframes blink {
-  0% {
-    opacity: 1;
+@media (max-width: 720px) {
+  .app-shell {
+    width: min(100vw - 16px, 1200px);
+    padding: 8px 0 12px;
   }
-
-  50% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-} */
-/* 
-@keyframes pulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  50% {
-    box-shadow: 0 0 40px rgba(255, 255, 0, 1);
-    transform: scale(1.1);
-    background: orange;
-  }
-} */
-
-
-
-/* @keyframes shake {
-  0% {
-    transform: translateX(0);
-  }
-
-  25% {
-    transform: translateX(-3px);
-  }
-
-  50% {
-    transform: translateX(3px);
-  }
-
-  75% {
-    transform: translateX(-3px);
-  }
-
-  100% {
-    transform: translateX(0);
-  }
-} */
+}

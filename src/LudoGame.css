@@ -1,105 +1,695 @@
-/* Add to LudoGame.css file */
-
-.token {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    width: 30px; /* Adjust size to fit in 40px cells */
-    height: 30px;
-    cursor: pointer;
-    z-index: 10; /* Ensure tokens appear above the board squares */
-    background-color: white; /* Placeholder color */
-    box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+.game-shell {
+  display: grid;
+  gap: 14px;
+  align-content: start;
 }
 
-/* Add colors for players (pIdx 0-3 maps to 1-4 here) */
-.player-1 { background-color: red; }
-.player-2 { background-color: green; }
-.player-3 { background-color: yellow; }
-.player-4 { background-color: blue; }
+.game-panel {
+  display: grid;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at top right, rgba(227, 75, 75, 0.1), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.1);
+  backdrop-filter: blur(14px);
+}
 
-/* Ensure the ludo-container class is defined as a grid in your CSS */
+.header-row {
+  display: grid;
+  gap: 6px;
+}
+
+.turn-banner {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.eyebrow {
+  margin: 0 0 2px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #5d6b7c;
+}
+
+.panel-label {
+  display: grid;
+  gap: 2px;
+}
+
+.panel-label h3,
+.board-titlebar h3,
+.summary-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #122033;
+}
+
+.turn-banner h2 {
+  margin: 0;
+  font-size: clamp(1.2rem, 1.7vw, 1.55rem);
+  line-height: 1;
+  color: #142235;
+}
+
+.status-copy {
+  margin: 4px 0 0;
+  max-width: 320px;
+  font-size: 0.88rem;
+  color: #4d5f73;
+}
+
+.turn-chip {
+  min-width: 88px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #fff;
+  box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.12);
+}
+
+.controls-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.dice-button,
+.secondary-button {
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.dice-button:hover,
+.secondary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.14);
+}
+
+.dice-button {
+  display: grid;
+  gap: 3px;
+  min-width: 132px;
+  padding: 10px 12px;
+  border-radius: 18px;
+  text-align: left;
+  color: #fff;
+  background: linear-gradient(135deg, #0f6c5a 0%, #153b57 100%);
+  box-shadow: 0 18px 36px rgba(17, 53, 89, 0.22);
+}
+
+.dice-label {
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.78;
+}
+
+.dice-face {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 54px;
+}
+
+.dice-value {
+  font-size: 0.8rem;
+  opacity: 0.92;
+}
+
+.dice-cube {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #fffdf7 0%, #f4efe2 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -3px 0 rgba(15, 23, 42, 0.08),
+    0 10px 18px rgba(8, 27, 44, 0.18);
+}
+
+.dice-cube.is-idle {
+  opacity: 0.88;
+  filter: saturate(0.85);
+}
+
+.dice-pip {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #153b57;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+}
+
+.dice-pip.top-left {
+  top: 10px;
+  left: 10px;
+}
+
+.dice-pip.top-right {
+  top: 10px;
+  right: 10px;
+}
+
+.dice-pip.middle-left {
+  top: 22px;
+  left: 10px;
+}
+
+.dice-pip.middle-right {
+  top: 22px;
+  right: 10px;
+}
+
+.dice-pip.bottom-left {
+  bottom: 10px;
+  left: 10px;
+}
+
+.dice-pip.bottom-right {
+  bottom: 10px;
+  right: 10px;
+}
+
+.dice-pip.center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.secondary-button {
+  padding: 10px 12px;
+  border-radius: 16px;
+  font-size: 0.84rem;
+  background: #fff9ed;
+  color: #8a5d13;
+  box-shadow: 0 10px 26px rgba(138, 93, 19, 0.12);
+}
+
+.player-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.player-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 14px;
+  color: #fff;
+  filter: saturate(0.95);
+  opacity: 0.88;
+  box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.08);
+}
+
+.player-card.is-current {
+  opacity: 1;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+}
+
+.player-card.is-finished {
+  outline: 3px solid rgba(255, 255, 255, 0.7);
+}
+
+.player-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.player-stats {
+  font-size: 0.8rem;
+}
+
+.board-and-score {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  gap: 12px;
+  align-items: stretch;
+}
+
+.info-panel {
+  display: grid;
+  gap: 10px;
+  align-self: stretch;
+}
+
+.play-area {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  grid-template-rows: auto 1fr;
+  gap: 12px;
+  align-items: start;
+  height: 100%;
+}
+
+.board-frame {
+  padding: 14px;
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.76)),
+    linear-gradient(180deg, rgba(222, 232, 244, 0.52), rgba(245, 236, 221, 0.38));
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow:
+    0 30px 60px rgba(15, 23, 42, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  overflow: auto;
+  display: grid;
+  gap: 10px;
+  max-width: 100%;
+}
+
+.board-titlebar,
+.summary-header {
+  display: grid;
+  gap: 2px;
+}
+
+.control-panel {
+  display: grid;
+  gap: 12px;
+}
+
+.control-card {
+  padding: 12px;
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.84));
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+}
+
+.control-panel .turn-banner {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+
+.turn-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+}
+
+.turn-stat {
+  display: grid;
+  gap: 2px;
+  padding: 10px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.06), rgba(15, 23, 42, 0.03));
+}
+
+.turn-stat-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #607086;
+}
+
+.turn-stat strong {
+  font-size: 1rem;
+  color: #142235;
+}
+
+.turn-tip {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #53657a;
+}
+
+.control-panel .controls-row {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.play-summary {
+  grid-column: 1 / -1;
+  min-height: 110px;
+  height: 100%;
+  align-self: stretch;
+  align-content: start;
+}
+
+.play-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 18px;
+}
+
+.play-summary-grid p {
+  margin: 0;
+}
 
 .ludo-container {
+  --cell-size: clamp(20px, min(calc((100vw - 95px) / 15), calc((100vh - 235px) / 15)), 44px);
   display: grid;
-  grid-template-columns: repeat(15, 30px); /* 15 columns, 40px wide each */
-  grid-template-rows: repeat(15, 30px);    /* 15 rows, 40px high each */
-  gap: .5px;
-  width: 100%;
-  margin: 5px; /* Center the board */
-  margin-bottom: 30px;
-}
-
-/* Base areas span 6x6 cells */
-.base {
-  display: flex;
+  position: relative;
+  grid-template-columns: repeat(15, var(--cell-size));
+  grid-template-rows: repeat(15, var(--cell-size));
   justify-content: center;
-  align-items: center;
-  border: 1px solid black;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.12));
 }
 
-/* Specific colors and positioning for each base */
-.red-base { 
-  background-color: #ff4d4d; 
-  grid-area: 1 / 1 / span 6 / span 6; /* Top-Left */
-}
-.green-base { 
-  background-color: #2ecc71; 
-  grid-area: 1 / 10 / span 6 / span 6; /* Top-Right (starts at column 10) */
-}
-.yellow-base { 
-  background-color: #f1c40f; 
-  grid-area: 10 / 10 / span 6 / span 6; /* Bottom-Right (starts at row 10, col 10) */
-}
-.blue-base { 
-  background-color: #3498db; 
-  grid-area: 10 / 1 / span 6 / span 6; /* Bottom-Left (starts at row 10) */
+.board-square,
+.base,
+.token {
+  display: grid;
+  place-items: center;
 }
 
-/* Style for individual tokens/buttons */
-button {
-    padding: 5px 30px;
-    margin: 5px;
-    cursor: pointer;
-    color:red;
-    background-color: #d5f1e0;
-}
 .board-square {
-  background-color: white; /* The color of the path squares */
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-/* Optional: Add specific colors to key starting squares if desired */
-.board-square.red-start { background-color: red; }
-.board-square.yellow-start { background-color: rgb(205, 240, 6); }
-.board-square.blue-start { background-color: rgb(36, 12, 252); }
-.board-square.green-start { background-color: rgb(33, 87, 44); }
-/* ... and so on for other colors */
-.board-square {
-  background-color: white; /* The default color of the path squares */
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+.track-square {
+  background: #e7dcc8;
 }
 
-/* Specific start zone colors (lighter shade works well here) */
-.red-start-zone {
-    background-color: #ffcccc; /* Lighter red */
-    border-color: red;
+.safe-square {
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.7) 0 26%, transparent 27%),
+    #e0c39e;
 }
 
-.green-start-zone {
-    background-color: #d5f1e0; /* Lighter green */
-    border-color: green;
+.red-home {
+  background: #f7c8c8;
 }
 
-.yellow-start-zone {
-    background-color: #fef0b3; /* Lighter yellow */
-    border-color: #f1c40f;
+.green-home {
+  background: #ccebdc;
 }
 
-.blue-start-zone {
-    background-color: #cce0f1; /* Lighter blue */
-    border-color: blue;
+.yellow-home {
+  background: #f6e7ac;
+}
+
+.blue-home {
+  background: #cbdaf9;
+}
+
+.center-square {
+  background: transparent;
+  border-color: transparent;
+}
+
+.center-home {
+  grid-area: 7 / 7 / span 3 / span 3;
+  align-self: stretch;
+  justify-self: stretch;
+  position: relative;
+  z-index: 2;
+  background: conic-gradient(
+    from 45deg,
+    #e34b4b 0deg 90deg,
+    #29a36a 90deg 180deg,
+    #d4a514 180deg 270deg,
+    #3b6ee6 270deg 360deg
+  );
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.65);
+}
+
+.base {
+  border-radius: 18px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.94);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  box-shadow: inset 0 0 0 10px rgba(255, 255, 255, 0.18);
+}
+
+.red-base {
+  grid-area: 1 / 1 / span 6 / span 6;
+  background: linear-gradient(135deg, #db4f55 0%, #b72f3d 100%);
+}
+
+.green-base {
+  grid-area: 1 / 10 / span 6 / span 6;
+  background: linear-gradient(135deg, #28af72 0%, #118458 100%);
+}
+
+.yellow-base {
+  grid-area: 10 / 10 / span 6 / span 6;
+  background: linear-gradient(135deg, #e8c847 0%, #cd9811 100%);
+}
+
+.blue-base {
+  grid-area: 10 / 1 / span 6 / span 6;
+  background: linear-gradient(135deg, #5687f0 0%, #335fce 100%);
+}
+
+.token {
+  width: calc(var(--cell-size) * 0.64);
+  height: calc(var(--cell-size) * 0.64);
+  align-self: center;
+  justify-self: center;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  color: #fff;
+  font-weight: 800;
+  font-size: clamp(0.58rem, 0.95vw, 0.9rem);
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.16);
+  z-index: 4;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.token:hover {
+  filter: brightness(1.05);
+}
+
+.token.is-movable {
+  outline: 3px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 5px rgba(15, 23, 42, 0.08), 0 8px 16px rgba(15, 23, 42, 0.18);
+  animation: tokenPulse 1.2s ease-in-out infinite;
+}
+
+.player-red {
+  background: #d84a52;
+}
+
+.player-green {
+  background: #209b64;
+}
+
+.player-yellow {
+  background: #c89b10;
+}
+
+.player-blue {
+  background: #3868dd;
+}
+
+.info-dock {
+  display: grid;
+  gap: 8px;
+}
+
+.rules-card {
+  padding: 12px;
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.93), rgba(255, 255, 255, 0.84));
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+}
+
+.spotlight-card {
+  background:
+    radial-gradient(circle at top right, rgba(15, 108, 90, 0.12), transparent 38%),
+    rgba(255, 255, 255, 0.9);
+}
+
+.rules-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.04rem;
+  color: #122033;
+}
+
+.rules-card p {
+  margin: 6px 0 0;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: #526377;
+}
+
+.finished-footer {
+  display: grid;
+  width: 100%;
+  justify-self: stretch;
+}
+
+.finished-card {
+  min-height: 120px;
+  display: grid;
+  gap: 14px;
+  align-content: center;
+  width: 100%;
+  min-width: 0;
+  padding: 18px 22px;
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at top right, rgba(59, 110, 230, 0.08), transparent 34%),
+    radial-gradient(circle at bottom left, rgba(227, 75, 75, 0.08), transparent 28%),
+    rgba(255, 255, 255, 0.9);
+}
+
+.finished-header {
+  display: grid;
+  gap: 4px;
+}
+
+.finished-card h3 {
+  font-size: 1.6rem;
+  margin: 0;
+}
+
+.finished-subtitle {
+  margin: 0;
+  color: #607086;
+  font-size: 0.88rem;
+}
+
+.finished-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.finished-list,
+.finished-summary {
+  display: grid;
+  gap: 6px;
+}
+
+.finished-card p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+@keyframes tokenPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 5px rgba(15, 23, 42, 0.08), 0 8px 16px rgba(15, 23, 42, 0.18);
+  }
+
+  50% {
+    box-shadow: 0 0 0 7px rgba(15, 23, 42, 0.12), 0 10px 20px rgba(15, 23, 42, 0.22);
+  }
+}
+
+@media (max-width: 960px) {
+  .board-and-score {
+    grid-template-columns: 1fr;
+  }
+
+  .play-area {
+    grid-template-columns: 1fr;
+  }
+
+  .control-panel .controls-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .play-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ludo-container {
+    --cell-size: clamp(18px, min(calc((100vw - 60px) / 15), calc((100vh - 270px) / 15)), 36px);
+  }
+
+  .info-dock {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .game-panel {
+    padding: 10px;
+  }
+
+  .turn-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .player-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .board-frame {
+    padding: 8px;
+  }
+
+  .board-titlebar {
+    gap: 0;
+  }
+
+  .ludo-container {
+    --cell-size: clamp(15px, min(calc((100vw - 20px) / 15), calc((100vh - 345px) / 15)), 24px);
+    gap: 1px;
+  }
+
+  .base {
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+  }
+
+  .rules-card {
+    padding: 10px;
+  }
+
+  .info-dock {
+    grid-template-columns: 1fr;
+  }
+
+  .control-card {
+    padding: 10px;
+  }
+
+  .play-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .turn-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .finished-card {
+    min-height: 96px;
+    padding: 14px 16px;
+  }
+
+  .finished-card h3 {
+    font-size: 1.25rem;
+  }
+
+  .finished-content {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 }
